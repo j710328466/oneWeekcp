@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+  <title>一周CP任务卡</title>
+  <script src="./js/flexible.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+  <script>$youziku.load("body","b247a4899ca34bd29da8076da3ddafe4","jdzhonyuanjian"),$youziku.draw()</script>
+  <link rel="stylesheet" href="./css/mission1.css">
+  <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+</head>
+<body>
+  <div id="mission1" class="mission" style="overflow: hidden;">
+    <h2 class="cp__title" v-if="isWeiXin()">{{title}}</h2>
+    <div class="title">
+      <img src="./img/mission.png" alt="">
+    </div>
+    <div class="miss-pro">
+      <img class="pro-stit" src="./img/stitle.png" alt="">
+      <i class="pro-jdt"></i>
+      <i class="pro-red" style="width:1rem"></i>
+      <img class="pro-dingz" src="./img/kedu.png" alt="">
+      <ul class="pro-day">
+        <li><a href="http://hd.wuhouapp.cn/app/index.php?i=3&c=entry&do=mission&m=yizhoucp&no=1&wxref=mp.weixin.qq.com">第1天</a></li>
+        <li>第2天</li>
+        <li>第3天</li>
+        <li>第4天</li>
+        <li>第5天</li>
+        <li>完成</li>
+      </ul>
+      <div class="self">
+        <img class="self-bg" src="./img/self.png">
+        <img class="self-ava" :src="self">
+      </div>
+      <div class="ta">
+        <img class="ta-bg" src="./img/ta.png">
+        <img class="ta-ava" :src="ta">
+      </div>
+    </div>
+    <div class="miss-rule">
+      <img class="miss-rule__1 desc" src="./img/firstday.png" alt="">
+      <p>第一个任务很简单，按要求上传你的照片和回答一个问题。每完成一个任务你可以根据对方完成的任务是否满意，送一颗❤️给对方，如果你送给对方的爱心满4个，对方就可以查看到你的照片。</p>
+      <img class="clrcle" src="./img/yuanjiao.png" alt="">
+    </div>
+    <form action="{php echo $this->createmobileurl('mission',array('no'=>$no));}" method="post">
+        <input type="text" :value="localIds" style="display: none" name="media_id">
+        <input type="text" name="no" value="1" style="display: none;">
+      <div class="miss-rule">
+        <div class="miss-rule__1 uPic">你的照片</div>
+        <div class="upload"  @click="upload" style="background-size:cover;background-repeat: no-repeat;background-position: center;">
+            <img class="upload-pic" :src="img_src" alt="" style="width:30%" v-show="upload_1">
+        </div>
+        <p class="tag">你送给对方心满3颗，对方才能看到你的照片.</p>
+        <img class="clrcle" src="./img/yuanjiao.png" alt="">
+      </div>
+      <div class="miss-rule">
+        <div class="miss-rule__1 uPic">你的微信号</div>
+          <input class="wxNum" type="text" name="weixin" placeholder="你的微信号">
+        <p class="tag">你送给对方心满3颗，对方才能看到你的微信号.</p>
+        <img class="clrcle" src="./img/yuanjiao.png" alt="">
+      </div>
+      <div class="miss-rule">
+        <div class="miss-rule__1 uPic">说说你的第一段感情故事</div>
+          <div class="say">
+            <textarea class="sayStory" rows="10" name="story"></textarea>
+          </div>
+      </div>
+      <div class="sub">
+        <label>
+          <input type="submit" v-show="false">
+          <img src="./img/submit.png" alt="">
+        </label>
+      </div>
+      <input type="" name="" :value="localIds" style="display:none;">
+    </form>
+    <br><br>
+    <div class="he-mess">
+      <img class="befNail" src="./img/nail.png" alt="">
+      <img class="avatar" :src="heAvatar" alt="">
+      <div class="title">
+        <img src="./img/rectan.png" alt="">
+        <p>{{heName}}的任务功课</p>
+      </div>
+      <div class="hePic">
+        <img src="./img/cp-header.png" alt="">
+      </div>
+      <p class="he-mess__desc"><span>注</span>刘胡兰已上传个人清晰照片，但是需要你完成任务，并且获得他给的4个赞以上，你才能看到他的照片</p>
+      <img class="befNail" src="./img/nail.png" alt="">
+      <img class="circle" src="./img/yuanjiao.png" alt="">
+    </div>
+    <div class="miss-rule">
+      <img class="miss-rule__1 desc" src="./img/story.png" alt="">
+      <p>第一个任务很简单，按要求上传你的照片和回答一个问题。每完成一个任务你可以根据对方完成的任务是否满意，送一颗❤️给对方，如果你送给对方的爱心满4个，对方就可以查看到你的照片。</p>
+    </div>
+    <div class="star">
+      <p class="starNum" @click="starCli()">{{starNum}}</p>
+      <p class="starDesc">你已经给了{{starNum}}个❤️，超过4个❤️他就可以看到你的资料</p>
+    </div>
+    <div class="tag-wuhou">
+      <img src="./img/wh-footer.png" alt="">
+    </div>
+    <div class="time_out" style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.7);position: fixed;top: 0;z-index: 999;display: none;">
+      <div style="width: 100%;height: 100%;display: flex;justify-content: center;align-items: center">
+          <img src="./img/time_out.png" alt="" style="width: 70%">
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" charset="utf-8"></script>
+  <script src="./js/mixin.js" charset="utf-8"></script>
+  <script src="/addons/yizhoucp/template/mobile/js/zepto.min.js"></script>
+  <script>
+      var url = "{php echo $this->createmobileurl('mission',array('no'=>$no));}";
+    var vm = new Vue({
+      el: '#mission1',
+      data: {
+        title: '一周CP任务卡',
+        self: './img/weixin.png',
+        ta: './img/weixin.png',
+        heName:'老哈',
+        heAvatar: './img/boy.png',
+        starNum: 0,
+        img_src:'/addons/yizhoucp/template/mobile/img/Upload.png',
+        localIds:"",
+        upload_1:true
+      },
+      mixins: [mixin],
+      methods: {
+        starCli:function () {
+          console.log(this.starNum);
+          if (this.starNum ==0) {
+            console.log(1);
+            this.starNum++
+          } else {
+            this.starNum--
+          }
+        },
+        upload:function(){
+          var that = this;
+          var a = event.currentTarget;
+          wx.chooseImage({
+            count:1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success: function (res) {
+               that.img_src = res.localIds[0];
+//               a.style.width = "80%";
+                that.upload_1 = false;
+                a.style.backgroundImage = 'url('+that.img_src+')';
+                //ios图片显示
+                wx.getLocalImgData({
+                    localId: that.img_src, // 图片的localID
+                    success: function (res) {
+                        a.style.backgroundImage = 'url('+res.localData+')';// localData是图片的base64数据，可以用img标签显示
+                    }
+                });
+                //上传图片
+               wx.uploadImage({
+                  localId:res.localIds[0], // 需要上传的图片的本地ID，由chooseImage接口获得
+                  isShowProgressTips: 1, // 默认为1，显示进度提示
+                  success: function (res) {
+                      that.localIds = res.serverId; // 返回图片的服务器端ID
+                  }
+              });
+            }
+          })
+
+        }
+      }
+    })
+    //wx配置
+    var shareMeta = {
+            imgUrl:"{$_W['attachurl']}{$config['share_img']}",
+            link : "{$_W[siteroot]}app/{php echo $this->createmobileurl('index');}",
+            desc : "{$config['share_desc']}",
+            title : "{$config['share_title']}",
+        };
+        wx.ready(function () {
+            wx.showOptionMenu();
+            wx.chooseImage();
+            wx.uploadImage();
+            wx.getLocalImgData();
+        });
+        var jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);};
+        jssdkconfig.debug = false;
+        jssdkconfig.jsApiList = [
+            'checkJsApi',
+            'showOptionMenu',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'chooseImage',
+            'uploadImage',
+            'getLocalImgData'
+        ];
+        wx.config(jssdkconfig);
+  </script>
+  <!--禁用微信分享按钮-->
+    <script>
+        function onBridgeReady() {
+            WeixinJSBridge.call('hideOptionMenu');
+        }
+
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        } else {
+            onBridgeReady();
+        }
+    </script>
+</body>
+</html>

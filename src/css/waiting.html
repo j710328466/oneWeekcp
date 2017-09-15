@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>匹配中</title>
+  <script src="./js/flexible.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+  <script type="text/javascript">
+    $youziku.load("body", "b247a4899ca34bd29da8076da3ddafe4", "jdzhonyuanjian");
+    $youziku.draw();
+    var timer = {$config['matchingtime']};
+  </script>
+  <link rel="stylesheet" href="./css/waiting.css">
+</head>
+<body>
+  <div id="waiting">
+    <h2 class="cp__title" v-if="isWeiXin()">{{title}}</h2>
+      <div class="title">
+        <img src="./img/waitingCP.png" alt="">
+      </div>
+      <div class="djs">
+        <img src="./img/daojishi.png">
+        <div class="time">
+          <p>{{d}}天</p>
+          <p>{{h}}小时</p>
+          <p>{{m}}分</p>
+        </div>
+      </div>
+      <div class="persent">
+        <img src="./img/persent.jpg" alt="">
+        <p class="per-num">{{preNum}}%</p>
+      </div>
+      <div class="improve">
+        <img src="./img/improve.png" alt="">
+      </div>
+      <div class="actRule">
+        <img src="./img/actRule.png" alt="">
+      </div>
+      <div class="attention">
+        <p class="att-desc">扫一扫，关注下面我们的微信号“午逅”粉丝卡，如果你匹配成功，我们会第一时间通过该微信号通知你，这样放置错过匹配结果的通知。</p>
+        <div class="att-pic">
+          <img src="./img/ewm.jpg" alt="">
+          <p>微信号：wuhoufuns</p>
+        </div>
+      </div>
+      <br>
+      <div class="tag-wuhou">
+        <img src="./img/wh-footer.png" alt="">
+      </div>
+  </div>
+
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script src="./js/wx.js" charset="utf-8"></script>
+  <script src="./js/mixin.js"></script>
+  <script>
+    console.log(timer);
+    var vm = new Vue({
+      data: {
+        title: '匹配你心中的CP',
+        name: '老哈',
+        d: '',
+        h: '',
+        m: '',
+        preNum: '80'
+      },
+      mixins: [mixin],
+      created () {
+      },
+      methods: {
+        djs: function () {
+          if (this.d <= 0 && this.h <= 0 && this.m <= 0) {
+            return false
+          } else {
+            return true
+          }
+        }
+      }
+    }).$mount('#waiting')
+  </script>
+  <script>
+    //微信配置
+
+    var shareMeta = {
+
+        imgUrl:"{$_W['attachurl']}{$config['share_img']}",
+
+        link : "{$_W[siteroot]}app/{php echo $this->createmobileurl('index');}",
+
+        desc : "XXX正在参与一周CP报名，能否顺利脱单，你的救援很关键！",
+
+        title : "XXX在CP报名厮杀的路上请求你的支援！",
+
+    };
+
+    wx.ready(function () {
+
+        wx.showOptionMenu();
+
+        wx.onMenuShareAppMessage(shareMeta);
+
+        wx.onMenuShareTimeline(shareMeta);
+
+    });
+
+    var jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);};
+
+    jssdkconfig.debug = false;
+
+    jssdkconfig.jsApiList = [
+
+        'checkJsApi',
+
+        'showOptionMenu',
+
+        'onMenuShareTimeline',
+
+        'onMenuShareAppMessage',
+
+    ];
+
+    wx.config(jssdkconfig);
+
+  </script>
+</body>
+</html>

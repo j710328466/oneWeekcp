@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>问题</title>
+  <script src="./js/flexible.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+  <script type="text/javascript">
+    $youziku.load("body", "b247a4899ca34bd29da8076da3ddafe4", "jdzhonyuanjian");
+    $youziku.draw();
+  </script>
+  <link rel="stylesheet" href="./css/ques.css">
+</head>
+<body>
+  <div id="ques">
+    <h2 class="cp__title" v-if="isWeiXin()">{{title}}</h2>
+    <div class="title">
+      <img src="./img/oneWeekCp.png" alt="">
+    </div>
+    <div class="ques-tag">
+      <img src="./img/desc.png" alt="">
+    </div>
+    <form class="ques-form" action="{php echo $this->createMobileurl('ques');}" method="post">
+      <ul class="questions">
+        <!-- 年龄 -->
+        <li>
+          <div class="question wantAge" >
+            <img class="ques-tag__pic" src="./img/howAge.png" alt="">
+            <div class="question-age" v-for="(item, index) in howAge" @click="howAgeCli(index)">
+              <label>
+                <i></i>
+                <img src="./img/ok.png" v-if="q_1 == index">
+                <input type="radio" v-show="false" name="age" :value="item.en">
+                <span>{{item.name}}</span>
+              </label>
+            </div>
+            <div class="keep">
+              <label>
+                <img class="keep-btn"src="./img/keep.png" @click="hideAge()">
+              </label>
+            </div>
+          </div>
+        </li>
+        <!-- 状态 -->
+        <li>
+          <div class="question wantZT" v-show="false" >
+            <img class="ques-tag__pic" src="./img/zhuantai.png">
+            <div class="question-age" v-for="(item,index) in zhuantai" @click="whatIng(index)" style="background:#fe954e">
+              <label >
+                <i></i>
+                <img src="./img/ok.png" v-if="q_2 == index">
+                <input type="radio" v-show="false" name="work_status" :value="item.en"><span>{{item.name}}</span>
+              </label>
+            </div>
+            <div class="keep">
+              <label>
+                <img class="keep-btn"src="./img/keep.png" @click="hideZt()">
+              </label>
+            </div>
+          </div>
+        </li>
+        <!-- 学历 -->
+        <li>
+          <div class="question wantXL" v-show="false" >
+            <img class="ques-tag__pic" src="./img/greed.png" alt="">
+            <div class="question-age" style="background:#ffc12b" v-for="(item, index) in greed" @click="whatXl(index)">
+              <label >
+                <i></i>
+                <img src="./img/ok.png" v-if="q_3 == index">
+                <input type="radio" v-show="false" name="education" :value="item.en"><span>{{item.name}}</span>
+              </label>
+            </div>
+            <div class="keep">
+              <label>
+                <img class="keep-btn"src="./img/keep.png" @click="hideXL()">
+              </label>
+            </div>
+          </div>
+        </li>
+        <!-- 性格 -->
+        <li>
+          <div class="question wantXG" v-show="false" >
+            <img class="ques-tag__pic" src="./img/kind.png" alt="">
+            <label>
+              <div class="question-kind" v-for="(item,index) in kind" @click="whatXg(index)">
+                <i></i>
+                <img src="./img/ok.png" v-show="xgTag.indexOf(index) >= 0">
+                <input type="checkbox" v-show="false" name="nature[]" :value="item.id" @click="chaTag(index)">
+                <span>{{item.name}}</span>
+              </div>
+            </label>
+            <div class="keep">
+              <label>
+                <img class="keep-btn"src="./img/keep.png" @click="hideXG()">
+              </label>
+            </div>
+          </div>
+        </li>
+        <!-- 技能 -->
+        <li>
+          <div class="question wantJN" v-show="false">
+            <img class="ques-tag__pic" src="./img/skill.png" alt="">
+            <label>
+              <div class="question-kind" style="background:#a4dfa6" v-for="(item,index) in skills">
+                <i></i>
+                <img src="./img/ok.png" v-show="skillTag.indexOf(index) >= 0">
+                <input type="checkbox" v-show="false" name="skill[]" :value="item.id" @click="skTag(index)"><span>{{item.name}}</span>
+              </div>
+            </label>
+            <div class="sub">
+              <label>
+                <input @click="subAll(event)" type="submit" style="display:none" name="submit">
+                <img src="./img/startPP.png" alt="">
+              </label>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </form>
+    <br><br>
+    <div class="tag-wuhou">
+      <img src="./img/wh-footer.png" alt="">
+    </div>
+    <div class="time_out" style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.7);position: fixed;top: 0;z-index: 999;display: none;">
+      <div style="width: 100%;height: 100%;display: flex;justify-content: center;align-items: center">
+          <img src="./img/time_out.png" alt="" style="width: 70%">
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script src="./js/wx.js" charset="utf-8"></script>
+  <script src="./js/mixin.js" charset="utf-8"></script>
+  <script>
+    var tags = {$tag};
+    var userSex = {$user['sex']};
+    console.log(userSex)
+    var vm = new Vue({
+      el: '#ques',
+      data: {
+        title: '你期望的一周cp',
+        howAge: [
+          {'en':'1','name':'比我大'},
+          {'en':'2','name':'比我小'},
+          {'en':'3','name':'无所谓'}
+        ],
+        q_1: 11,
+        zhuantai: [
+          {'en':'1','name':'学生'},
+          {'en':'2','name':'工作者'},
+          {'en':'3','name':'自由职业'},
+          {'en':'4','name':'无所谓'}
+        ],
+        q_2: 22,
+        greed: [
+          {'en':'1','name':'大专及以上'},
+          {'en':'2','name':'本科及以上'},
+          {'en':'3','name':'博士及以上'},
+          {'en':'4','name':'无所谓'}
+        ],
+        q_3: 33,
+        kind: [],
+        xgTag: [],
+        q_4: 44,
+        skills: [],
+        skillTag: [],
+        q_5: 55
+      },
+      mixins: [mixin],
+      created () {
+        if (userSex==1) {
+          this.kind = tags[1][1]
+          this.skills = tags[1][2]
+        } else {
+          this.kind = tags[2][1]
+          this.skills = tages[2][2]
+        }
+      },
+      mounted () {
+      },
+      methods: {
+        hideAge () {
+          var itAge = $("[name='age']:checked").val()
+          if (itAge==null) {
+            alert('请选择')
+            return false
+          }
+          $('.wantAge').hide()
+          $('.wantZT').show()
+        },
+        howAgeCli (index) {
+          this.q_1 = index
+        },
+        hideZt () {
+          var zt = $("[name='work_status']:checked").val()
+          if (zt==null) {
+            alert('请选择')
+            return false
+          }
+          $('.wantZT').hide()
+          $('.wantXL').show()
+        },
+        whatIng (index) {
+          this.q_2 = index
+        },
+        whatXl (index) {
+          this.q_3 = index
+        },
+        whatXg (index) {
+          this.q_4 = index
+        },
+        chaTag:function(index){
+          if(this.xgTag.indexOf(index) >= 0){
+            this.xgTag.splice(this.xgTag.indexOf(index),1);
+          }else{
+            this.xgTag.push(index);
+          }
+        },
+        hideXL () {
+          var xueli = $("[name='education']:checked").val()
+          if (xueli==null) {
+            alert('请选择')
+            return false
+          }
+          $('.wantXL').hide()
+          $('.wantXG').show()
+        },
+        hideXG () {
+          var xueli = $("[name='nature[]']:checked").val()
+          if (xueli==null) {
+            alert('请选择')
+            return false
+          }
+          $('.wantXG').hide()
+          $('.wantJN').show()
+        },
+        skTag: function (index) {
+          if(this.skillTag.indexOf(index) >= 0){
+            this.skillTag.splice(this.skillTag.indexOf(index),1);
+          }else{
+            this.skillTag.push(index);
+          }
+        },
+        subAll: function (event) {
+          var skill = $("[name='skill[]']:checked").val()
+          if (skill==null) {
+            event.preventDefault()
+            alert('请选择')
+          }
+        }
+      }
+    })
+  </script>
+  <script>
+    //微信配置
+
+    var shareMeta = {
+
+        imgUrl:"{$_W['attachurl']}{$config['share_img']}",
+
+        link : "{$_W[siteroot]}app/{php echo $this->createmobileurl('index');}",
+
+        desc : "你的好友XXX感受到了洪荒之力的召唤，正在参与南昌一周CP报名，快点进去围观",
+
+        title : "南昌最火一周CP来袭，XXX邀你一起寻找真爱",
+
+    };
+
+    wx.ready(function () {
+
+        wx.showOptionMenu();
+
+        wx.onMenuShareAppMessage(shareMeta);
+
+        wx.onMenuShareTimeline(shareMeta);
+
+    });
+
+    var jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);};
+
+    jssdkconfig.debug = false;
+
+    jssdkconfig.jsApiList = [
+
+        'checkJsApi',
+
+        'showOptionMenu',
+
+        'onMenuShareTimeline',
+
+        'onMenuShareAppMessage',
+
+    ];
+
+    wx.config(jssdkconfig);
+
+  </script>
+</body>
+</html>

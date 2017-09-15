@@ -1,0 +1,153 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+}
+.container {
+  position: relative;
+}
+.container .ziliao {
+  overflow: hidden;
+  background: url("../img/Bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.container .ziliao .pic {
+  display: block;
+  width: 10rem;
+}
+.container .ziliao .title {
+  text-align: center;
+  margin-top: 0.67rem;
+  margin-bottom: 0.27rem;
+}
+.container .ziliao .title .title-pic {
+  width: 6.93rem;
+}
+.container .ziliao .award {
+  position: relative;
+  margin: 0.48rem;
+}
+.container .ziliao .award .award-pic {
+  width: 100%;
+  height: 2.293333rem;
+}
+.container .ziliao .award .award-fl {
+  position: absolute;
+  top: 0.3rem;
+  left: 0.85rem;
+}
+.container .ziliao .award .award-fl .cinima {
+  text-align: center;
+  float: left;
+}
+.container .ziliao .award .award-fl .cinima p {
+  font-size: 0.37rem;
+}
+.container .ziliao .award .award-fl .cinima span {
+  color: #404474;
+  font-weight: 400;
+  font-size: 0.27rem;
+  border-top: 1px solid #404474;
+  border-bottom: 1px solid #404474;
+}
+.container .ziliao .award .award-fl .mv-name {
+  float: left;
+  margin-top: 0.05rem;
+  text-align: center;
+}
+.container .ziliao .award .award-fl .mv-name p {
+  color: #404474;
+  font-size: 0.56rem;
+  font-weight: 600;
+}
+.container .ziliao .award .award-fl .mv-name span {
+  color: #626262;
+  font-size: 0.4rem;
+}
+.container .ziliao .award .award-fr {
+  position: absolute;
+  top: 0.24rem;
+  right: 0.61rem;
+}
+.container .ziliao .award .award-fr .award-lq {
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+}
+.container .ziliao .rule {
+  position: relative;
+  margin: 0.48rem;
+}
+.container .ziliao .rule .rule-pic {
+  width: 100%;
+}
+.container .ziliao .rule .rule-cont {
+  position: absolute;
+  margin-top: 0.93rem;
+  top: 0;
+  left: 0;
+}
+.container .ziliao .rule .rule-cont p {
+  padding: 0.4rem 0.27rem;
+  font-weight: 500;
+  font-size: 0.4rem;
+  color: #5b5ea4;
+}
+.container .mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+.container .hexiao {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 8.96rem;
+  height: 9.59rem;
+  background: #fff;
+  text-align: center;
+  border-radius: 20px;
+}
+.container .hexiao .ewm {
+  position: absolute;
+  width: 4.4rem;
+  height: 4.4rem;
+  top: 0.99rem;
+  left: 2.25rem;
+  background: #484848;
+}
+.container .hexiao .tag {
+  position: absolute;
+  width: 6.8rem;
+  font-size: 0.4rem;
+  font-weight: 500;
+  top: 6.18rem;
+  left: 1.2rem;
+  color: #484848;
+}
+.container .hexiao .hexiao-btn {
+  position: absolute;
+  width: 3.2rem;
+  height: 0.93rem;
+  left: 2.93rem;
+  bottom: 0.67rem;
+  text-align: center;
+  background: #b4a3e5;
+  border-radius: 20px;
+}
+.container .hexiao .hexiao-btn .off {
+  line-height: 0.93rem;
+  font-size: 0.56rem;
+  color: #fff;
+  vertical-align: middle;
+  justify-content: center;
+}
+/*# sourceMappingURL=award.css.map */

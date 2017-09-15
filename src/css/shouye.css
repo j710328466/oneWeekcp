@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+}
+.shouye {
+  position: relative;
+  overflow: hidden;
+  background: url("../img/15.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+.shouye .banner {
+  text-align: center;
+}
+.shouye .banner .bannerPic {
+  width: 96.5%;
+  height: 11.95rem;
+  zoom: 0.5;
+}
+.shouye .content {
+  width: 100%;
+  height: 100%;
+}
+.shouye .content .title {
+  position: relative;
+  text-align: center;
+  line-height: 1.12rem;
+  font-size: 0.533333rem;
+  font-weight: 500;
+}
+.shouye .content .title:before {
+  content: '';
+  position: absolute;
+  width: 0.853333rem;
+  height: 0.05rem;
+  top: 50%;
+  left: 1.2rem;
+  background: #000;
+}
+.shouye .content .title::after {
+  content: '';
+  position: absolute;
+  width: 0.853333rem;
+  height: 0.05rem;
+  top: 50%;
+  right: 1.2rem;
+  background: #000;
+}
+.shouye .content .footer {
+  display: flex;
+}
+.shouye .content .footer .fl {
+  flex: 0 0 6.133333rem;
+  float: left;
+}
+.shouye .content .footer .fl .say {
+  display: flex;
+  background: #5e4e7a;
+  background-repeat: no-repeat;
+  border-top-right-radius: 1.33rem;
+  width: 84%;
+  height: 1.15rem;
+  border-bottom-right-radius: 1.33rem;
+}
+.shouye .content .footer .fl .say .avatar {
+  display: block;
+  width: 0.99rem;
+  height: 0.99rem;
+  border-radius: 50%;
+  margin-left: 0.466667rem;
+  padding-top: 0.08rem;
+}
+.shouye .content .footer .fl .say .text {
+  position: relative;
+  display: inline-block;
+  font-size: 0.266667rem;
+  color: #fff;
+  margin-left: 0.106667rem;
+}
+.shouye .content .footer .fl .say .text .name {
+  font-weight: 600;
+  margin-top: 0.176667rem;
+}
+.shouye .content .footer .fl .say .text .desc {
+  display: inline-block;
+}
+.shouye .content .footer .fl .fuli {
+  font-size: 0.266666rem;
+  padding: 0.266666rem 0.266666rem 0.266666rem 0.533333rem;
+  line-height: 0.4rem;
+}
+.shouye .content .footer .fl .fuli span {
+  color: #5e4e78;
+  font-weight: 600;
+}
+.shouye .content .footer .fl .bmTime {
+  margin-left: 0.533333rem;
+  padding-bottom: 0.266666rem;
+}
+.shouye .content .footer .fl .bmTime .bmTime-pic {
+  width: 1.6rem;
+  height: 0.533333rem;
+  vertical-align: middle;
+}
+.shouye .content .footer .fl .bmTime p {
+  font-weight: 600;
+  color: #392c41;
+}
+.shouye .content .footer .fr {
+  position: relative;
+  text-align: center;
+}
+.shouye .content .footer .fr .fr-fenxiang {
+  height: 5rem;
+  width: 3.47rem;
+  vertical-align: bottom;
+}
+.shouye .content .footer .fr .ewm {
+  position: absolute;
+  vertical-align: middle;
+  top: 1.65rem;
+  left: 0.85rem;
+  font-size: 0.27rem;
+  letter-spacing: -1px;
+  text-align: center;
+}
+.shouye .content .footer .fr .ewm .ewm-pic {
+  width: 1.65rem;
+  height: 1.65rem;
+}
+/*# sourceMappingURL=shouye.css.map */

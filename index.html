@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>一周 CP</title>
+  <script src="./js/flexible.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+  <script>$youziku.load("body","b247a4899ca34bd29da8076da3ddafe4","jdzhonyuanjian"),$youziku.draw()</script>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+  <div id="cp">
+    <h2 class="cp__title" v-if="isWeiXin()">{{title}}</h2>
+
+    <div class="cp-mask" v-show="endShow()">
+      <div class="cp-end" @click="hide()">
+        <p class="end-desc">活动报名已结束，可以扫下面的二维码关注我们下一期活动</p>
+        <img class="end-pic" src="./img/bg.png" alt="">
+      </div>
+    </div>
+
+    <div class="cp-content" v-show="!show">
+      <div class="cp-header">
+        <img src="./img/cp-header.png" alt="" class="header-pic">
+      </div>
+      <div class="cp-tag">
+        <img src="./img/cp-tag.png" class="cp-tag__Pic" alt="">
+        <div class="btn cp-btn">
+          <a class="btn__js" href="javascript:;" @click="timeOver()">
+            <img class="cp-btn__pic" src="./img/cp-btn.png" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script src="./js/wx.js" charset="utf-8"></script>
+  <script src="./js/mixin.js"></script>
+  <script>
+    var vm = new Vue({
+      data: {
+        title: '一周CP',
+        show: false,
+        d: '',
+        h: '',
+        m: ''
+      },
+      mixins: [mixin],
+      created () {
+        console.log('时间初始化')
+        var leftTime = (new Date(2017,8 - 1,28,16,40)) - (new Date())
+            ,d = parseInt(leftTime / 1000 / 60 / 60 / 24)
+            ,h = parseInt(leftTime / 1000 / 60 / 60 % 24)
+            ,m = parseInt(leftTime / 1000 / 60 % 60)
+            this.d = d
+            this.h = h
+            this.m = m
+            console.log(this.d, h, m)
+      },
+      methods: {
+        hide () {
+          return this.show = false
+        },
+        endShow () {
+          return this.show
+        },
+        timeOver () {
+          if (this.d <= 0 && this.h <= 0 && this.m <= 0) {
+            return this.show = true
+          } else {
+            console.log(this.$el.querySelector('.btn__js'))
+            this.$el.querySelector('.btn__js').href = '../addons/yizhoucp/template/mobile/inform.html'
+          }
+        }
+      }
+    }).$mount('#cp')
+  </script>
+</body>
+</html>

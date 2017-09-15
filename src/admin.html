@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no, email=no, address=no" >
+    <title>申请管理员</title>
+    <link rel="stylesheet" href="/addons/caiquan/template/mobile/css/iui.css">
+    <link rel="stylesheet" href="/addons/caiquan/template/mobile/css/common.css">
+    <link rel="stylesheet" href="/addons/caiquan/template/mobile/css/add_order.css">
+</head>
+<script>
+    var documentEl_width = document.documentElement.clientWidth;
+    if( documentEl_width > 640 ) documentEl_width = 640;
+    document.documentElement.style.fontSize = documentEl_width / 7.5 + 'px';
+    //提交ajax
+    var admin_url  = '{$_W['siteroot']}app/{php echo $this->createMobileUrl('getadmin');}';
+</script>
+<style>
+    .input_item {
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        border-bottom: 1px solid #f8f8f8;
+    }
+    .input_item input {
+        width: 100%;
+        font-size: 14px;
+    }
+    .i_cells .input_item:first-child {
+        border-top: 1px solid #f8f8f8;
+    }
+    .mask {
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    z-index: 1;
+    /*background-color: rgba(0, 0, 0, .5);*/
+    background-color: #b3b3b3;
+}
+.all {
+    position: absolute;
+    z-index: 10;
+    width: 7rem;
+    left: .25rem;
+    top: .45rem;
+    color: #212121;
+}
+
+</style>
+<body>
+    <main class="i_container" id="i_container" v-cloak>
+        <input type="hidden" name="" id="status" value="{$list['status']}">
+        <!--<h2 class="text_center cl_main " style="padding: .5rem 0 .4rem;">申请管理员</h2>            -->
+
+        <div class="mask"></div>
+        <div class="all bg_fff">
+            <p class="bg_main text_center cl_fff" style="line-height: .83rem;">申请详情</p>
+            <div class="i_cells cl_main" style="padding: 10px 0;">
+                <section class="i_cell bg_fff input_item">
+                    <div class="i_cell_hd ">姓名: </div>
+                    <div class="i_cell_bd">
+                        <input id="name" type="text" name="" value="{$list['name']}">
+                    </div>
+                </section>
+                <section class="i_cell bg_fff input_item">
+                    <div class="i_cell_hd">手机号: </div>
+                    <div class="i_cell_bd">
+                        <input id="mobile" type="text" name="" value="{$list['phone']}">
+                    </div>
+                </section>
+            </div>
+            
+
+            <div class="sub_wrap" style="width: 80%; padding: .5rem 0; margin: 0 auto;">
+                <a href="javascript:;" @click="sub" class="i_btn bg_main cl_fff">{{subTextByStatus}}</a>
+            </div>
+
+        </div><!--all结束-->
+
+        <i-dialog-one :show="subPrompt"
+                      dialog-hd-text="提示"
+                      @primary="subPrompt=false"
+                        >
+            <div>
+                {{subPrompt_text}}
+            </div>
+        </i-dialog-one>
+    </main><!-- container end -->
+
+    <!-- 弹窗模版 -->
+    <template id="tpl_dialog_one">
+        <div class="i_dialog_wrap">
+            <transition name="i_fade">
+                <div class="i_mask" v-show="show" @click="hideOnBlur && hide()"></div>
+            </transition>
+            <transition :name="dialogTransition">
+                <div class="i_dialog" v-show="show">
+                    <div class="i_dialog_hd">{{dialogHdText}}</div>
+                    <div class="i_dialog_bd">
+                        <slot></slot>
+                    </div>
+                    <div class="i_dialog_ft">
+                        <a href="javascript:;" @click="onPrimary" class="i_dialog_btn i_dialog_btn_primary cl_main">{{dialogFtText}}</a>
+                    </div>
+                </div>
+            </transition>
+        </div>
+    </template>
+    
+    <!-- js部分 -->
+    <script src="http://cdn.wuhouhd.com/lib/zepto.min.js"></script>
+    <script src="/addons/caiquan/template/mobile/js/vue.min.js"></script>
+    <script src="/addons/caiquan/template/mobile/js/iui.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script>
+    wx.config({
+        debug: false,
+        appId: '{$signPackage.appId}',
+        timestamp: '{$signPackage.timestamp}',
+        nonceStr: '{$signPackage.nonceStr}',
+        signature: '{$signPackage.signature}',
+        jsApiList: [
+            'hideOptionMenu',
+        ]
+    });
+
+    wx.ready(function () {
+        wx.hideOptionMenu({});
+    });
+    </script>
+    <script>
+
+        // ;(function(){
+    function i_checkPhone(_phone){
+        _phone += '';
+        if(!(/^1[34578]\d{9}$/.test(_phone))){
+            return false;
+        }
+        return true;
+    }
+    var i_comp = {
+        dialog_one:{
+            template: "#tpl_dialog_one",
+            props: {
+                dialogHdText: {
+                    type: String,
+                    default: "标题部分",
+                },
+                dialogFtText: {
+                    type: String,
+                    default: "我知道了",
+                },
+                show: {
+                    type: Boolean,
+                    default: false,
+                },
+                hideOnBlur: {
+                    type: Boolean,
+                    default: false,
+                },
+                dialogTransition: {
+                    tyep: String,
+                    default: "i_dialog",
+                },
+            },
+            methods: {
+                onPrimary: function(){
+                    console.log('will be primary');
+                    
+                    this.$emit('primary');
+                },
+                hide: function(){
+                    this.$emit('hide');
+                }
+            }
+        },
+    };
+    var ticking = false;
+    var vm = new Vue({
+        el: "#i_container",
+        data: {
+            isShowToast: false,
+            toast_text: '',
+            subPrompt_text: '',
+            subPrompt: false,
+            status: 0,           
+        },
+        computed: {
+            subTextByStatus: function(){
+                switch(this.status) {
+                    case -2: return '提交';
+                    case 0: return '请等待审核';
+                    case 1: return "审核通过";
+                    case -1: return "审核未通过";
+                }
+            }
+        },
+        methods: {
+            showSubPrompt: function(_text){
+                this.subPrompt_text = _text;
+                this.subPrompt = true;
+            },
+            sub: function() {
+                if( this.status !== -2 ) return;
+                var mobile = document.getElementById('mobile').value;
+                var name = document.getElementById('name').value;
+                if( name.length <= 0 ) {
+                    this.showSubPrompt('姓名不允许为空');
+                    return;
+                }
+                if( !i_checkPhone(mobile) ) {
+                    this.showSubPrompt('请输入正确的手机号码');
+                    return;
+                }
+                if( ticking ) return;
+                ticking = true;
+                var that = this;
+                $.ajax({
+                    url: admin_url,
+                    type: 'post',
+                    data: {
+                        mobile: mobile,
+                        name: name,
+                    },
+                    dataType: "json",
+                    success: function(res) {
+                        console.log('res', res);
+                        ticking = false;
+                        that.showSubPrompt(res && res.info ? res.info : '');
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 3500);
+                    }
+                })
+            },
+            showToast: function(_text){
+                this.toast_text = _text;
+                this.isShowToast = true;
+                (function(that){
+                    setTimeout(function(){
+                        that.isShowToast = false;
+                    }, 2000);
+                })(this);
+            },
+            closeWindow: function(){
+                console.log('133');
+                
+                this.subPrompt = false;
+                wx.closeWindow();
+            },
+        },
+        components: {
+            iDialogOne: i_comp.dialog_one,
+        },
+        mounted: function() {
+            this.status = Number(document.getElementById('status').value);
+            if(this.status === '') this.status = -2;
+        },
+        
+    });
+// })();
+        wx.config({
+            debug: false,
+            appId: '{$signPackage.appId}',
+            timestamp: '{$signPackage.timestamp}',
+            nonceStr: '{$signPackage.nonceStr}',
+            signature: '{$signPackage.signature}',
+            jsApiList: [
+                'showOptionMenu',
+                'closeWindow',
+            ]
+        });
+        
+        wx.ready(function () {
+            wx.hideOptionMenu({});
+        });
+    </script>
+</body>

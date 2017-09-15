@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>一周CP任务卡</title>
+  <script src="./js/flexible.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+  <link rel="stylesheet" href="./css/mission2.css">
+  <script>
+      //wx配置
+      var shareMeta = {
+          imgUrl:"{$_W['attachurl']}{$config['share_img']}",
+          link : "{$_W[siteroot]}app/{php echo $this->createmobileurl('index');}",
+          desc : "{$config['share_desc']}",
+          title : "{$config['share_title']}",
+      };
+      wx.ready(function () {
+          wx.showOptionMenu();
+      });
+      var jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);};
+      jssdkconfig.debug = false;
+      jssdkconfig.jsApiList = [
+          'checkJsApi',
+          'showOptionMenu',
+          'onMenuShareTimeline',
+          'onMenuShareAppMessage',
+          'chooseImage',
+          'uploadImage',
+          'startRecord',
+          'stopRecord',
+          'onVoiceRecordEnd',
+          'playVoice',
+          'pauseVoice',
+          'stopVoice',
+          'uploadVoice'
+      ];
+      wx.config(jssdkconfig);
+  </script>
+  <!--禁用微信分享按钮-->
+    <script>
+        function onBridgeReady() {
+            WeixinJSBridge.call('hideOptionMenu');
+        }
+
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        } else {
+            onBridgeReady();
+        }
+    </script>
+  <style>
+      .tape{
+        margin-top: 15%;
+        text-align: center;
+        position: relative;
+      }
+      .cidai{
+        width:90%;
+      }
+      .record,.play{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-55%);
+      }
+      .record img{
+        width: 50%;
+      }
+      .play img{
+        width: 50%;
+      }
+      .record_text{
+        position: absolute;
+        top: 78%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
+      .again{
+        text-align: center;
+        font-weight: bold;
+        font-size: 16px;
+      }
+    </style>
+</head>
+<body>
+  <div id="mission2" class="mission" style="overflow: hidden;">
+    <h2 class="cp__title" v-if="isWeiXin()">{{title}}</h2>
+    <div class="title">
+      <img src="./img/mission.png" alt="">
+    </div>
+    <div class="miss-pro">
+      <img class="pro-stit" src="./img/stitle.png" alt="">
+      <i class="pro-jdt"></i>
+      <i class="pro-red" style="width: 2.3rem;"></i>
+      <img class="pro-dingz" src="./img/kedu.png" alt="">
+      <ul class="pro-day">
+        <li><a href="http://hd.wuhouapp.cn/app/index.php?i=3&c=entry&do=mission&m=yizhoucp&no=1&wxref=mp.weixin.qq.com">第1天</a></li>
+        <li><a href="http://hd.wuhouapp.cn/app/index.php?i=3&c=entry&do=mission&m=yizhoucp&no=2&wxref=mp.weixin.qq.com">第2天</a></li>
+        <li>第3天</li>
+        <li>第4天</li>
+        <li>第5天</li>
+        <li>完成</li>
+      </ul>
+      <div class="self">
+        <img class="self-bg" src="./img/self.png">
+        <img class="self-ava" :src="self">
+      </div>
+      <div class="ta" style="left:2.6rem">
+        <img class="ta-bg" src="./img/ta.png">
+        <img class="ta-ava" :src="ta">
+      </div>
+    </div>
+    <div class="miss-rule">
+      <img class="miss-rule__1 desc" src="./img/mission.png" alt="">
+      <p>声音是一个人的第二个面孔，每个人内心可能都是声优控，用语音来回答下这个问题，也许她会迷恋你的声音。</p>
+    </div>
+    <div action="./mission3.html" method="post">
+      <br>
+      <div class="he-mess">
+        <img class="befNail" src="./img/nail.png" alt="">
+        <img class="avatar" :src="heAvatar" alt="">
+        <div class="title">
+          <img src="./img/rectan.png" alt="">
+          <p>{{heName}}的任务功课</p>
+        </div>
+        <!-- <div class="voice">
+          <img src="./img/cidai.png" alt="">
+          <div class="act">
+            <img v-if="play" class="play" src="./img/play.png" alt="" @click="">
+            <img v-else class="pause" src="./img/Pause.png" alt="">
+          </div>
+          <span class="play_text" style="position: absolute;left: 41.5%;top: 70%;">点击播放</span>
+          <audio class="voice-ad" src="http://ws.stream.qqmusic.qq.com/102054055.m4a?fromtag=46"></audio>
+          <p class="restart">重新录制</p>
+        </div> -->
+
+
+        <!-- 录音 -->
+          <div class="tape">
+              <img src="/addons/yizhoucp/template/mobile/img/cidai.png" alt="" class="cidai">
+              <div class="record" v-show="!record_over">
+                  <img src="./img/play.png" alt="" @click="record" v-show="recording == false">
+                  <img src="./img/Pause.png" alt="" @click="stop_record" v-show="recording == true">
+              </div>
+              <div class="play" v-show="record_over">
+                <img src="./img/play.png" alt="" @click="play" v-show="playing == false">
+                <img src="./img/Pause.png" alt="" @click="pause" v-show="playing == true">
+              </div>
+              <p class="record_text">
+                  <span style="border: 2px solid black;background-color:#ffea3e;padding: 0.08rem;border-radius: 0.1rem">{{record_text}}</span>
+              <p/>
+          </div>
+          <p class="again" @click="record">
+            重新录制
+          </p>
+        <!-- 录音 -->
+
+
+
+        <img class="befNail" src="./img/nail.png" alt="">
+      </div>
+      <form action="" class="task2_submit" method="post">
+          <input type="text" :value="audio_serverId" name="media_id" style="display: none">
+          <input type="text" value="2" name="no" style="display: none">
+          <button type="submit" style="border: none;background-color:transparent;margin-bottom: 0.3rem">
+            <img src="/addons/yizhoucp/template/mobile/img/submit.png" alt="" style="width: 50%">
+          </button>
+      </form>
+      <br>
+      <div class="he-mess">
+        <img class="befNail" src="./img/nail.png" alt="">
+        <img class="avatar" :src="myAvatar" alt="">
+        <div class="title">
+          <img src="./img/rectan.png" alt="">
+          <p>{{myName}}的任务功课</p>
+        </div>
+        <!-- 他的录音 -->
+        <div class="tape">
+            <img src="/addons/yizhoucp/template/mobile/img/cidai.png" alt="" class="cidai">
+            <div class="record">
+                <img src="./img/play.png" alt="">
+                <img src="./img/Pause.png" alt="">
+            </div>
+            <div class="play" v-show="record_over">
+              <img src="./img/play.png" alt="" @click="play" v-show="playing == false">
+              <img src="./img/Pause.png" alt="" @click="pause" v-show="playing == true">
+            </div>
+            <p class="record_text">
+                <span style="border: 2px solid black;background-color:#ffea3e;padding: 0.08rem;border-radius: 0.1rem">点击按钮开始播放</span>
+            <p/>
+        </div>
+        <p class="waitMition">等待TA完成任务</p>
+        <img class="befNail" src="./img/nail.png" alt="">
+      </div>
+      <div class="star">
+        <label>
+          <input type="submit" v-show="false">
+          <p class="starNum" @click="starCli()">{{starNum}}</p>
+        </label>
+        <p class="starDesc">你已经给了{{starNum}}个❤️，超过4个❤️他就可以看到你的资料</p>
+      </div>
+    </div>
+    <div class="tag-wuhou">
+      <img src="./img/wh-footer.png" alt="">
+    </div>
+    <div class="time_out" style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.7);position: fixed;top: 0;z-index: 999;display: none;">
+      <div style="width: 100%;height: 100%;display: flex;justify-content: center;align-items: center">
+          <img src="./img/time_out.png" alt="" style="width: 70%">
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script src="./js/wx.js" charset="utf-8"></script>
+  <script src="./js/mixin.js" charset="utf-8"></script>
+  <script>
+    var vm = new Vue({
+      el: '#mission2',
+      data: {
+        title: '任务2',
+        self: './img/weixin.png',
+        ta: './img/weixin.png',
+        heName:'老哈',
+        myName: '刘罗锅',
+        heAvatar: './img/boy.png',
+        myAvatar: './img/girl.png',
+        starNum: 1,
+        record_over:false,
+        recording: false,
+        playing:false,
+        record_text:"点击按钮开始录制",
+        audio_src:"",
+        audio_serverId:""
+      },
+      mixins: [mixin],
+      methods: {
+        starCli:function() {
+          if (this.starNum==1) {
+            this.starNum++
+          } else {
+            this.starNum--
+          }
+        },
+        record:function(){
+          wx.startRecord();//开始录制
+          this.recording = true;
+          this.record_text = "点击按钮停止录制";
+          this.record_over = false;
+          var that = this;
+          wx.onVoiceRecordEnd({// 录音时间超过一分钟没有停止的时候会执行 complete 回调
+              complete: function (res) {
+                  that.audio_src = res.localId;
+                  this.record_text = "点击按钮开始播放";
+                  this.record_over = true;
+                  wx.uploadVoice({
+                      localId:res.localId , // 需要上传的音频的本地ID，由stopRecord接口获得
+                      isShowProgressTips: 1, // 默认为1，显示进度提示
+                      success: function (res) {
+                          that.audio_serverId = res.serverId; // 返回音频的服务器端ID
+                      }
+                  });
+              }
+          });
+        },
+        stop_record:function(){
+          var that = this;
+          wx.stopRecord({//停止录制
+              success: function (res) {
+                  that.audio_src = res.localId;
+                  wx.uploadVoice({
+                      localId:res.localId , // 需要上传的音频的本地ID，由stopRecord接口获得
+                      isShowProgressTips: 1, // 默认为1，显示进度提示
+                      success: function (res) {
+                          that.audio_serverId = res.serverId; // 返回音频的服务器端ID
+                      }
+                  });
+              }
+          });
+          this.recording = false;
+          this.record_text = "点击按钮开始播放";
+          this.record_over = true;
+        },
+        play:function () {
+            this.playing = true;
+            this.record_text = "点击按钮停止停止播放";
+            var that = this
+            wx.playVoice({//开始播放
+                localId:that.audio_src
+            });
+            wx.onVoicePlayEnd({//自动停止播放
+                success: function (res) {
+                    that.playing = false;
+                    that.record_text = "点击播放";
+                }
+            });
+        },
+        pause:function () {
+            var that = this;
+            wx.stopVoice({//停止播放
+                localId:that.audio_src
+            });
+            this.playing = false;
+            this.record_text = "点击按钮开始播放";
+        }
+      }
+    })
+  </script>
+  <script type="text/javascript">
+      $youziku.load("body", "b247a4899ca34bd29da8076da3ddafe4", "jdzhonyuanjian");
+      $youziku.draw();
+  </script>
+</body>
+</html>

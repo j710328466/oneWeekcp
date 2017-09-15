@@ -1,0 +1,248 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+}
+a {
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+input {
+  outline: none;
+}
+.cp__title {
+  height: 1.2rem;
+  line-height: 1.2rem;
+  text-align: center;
+  font-size: 0.48rem;
+  font-weight: 400;
+  background: #000;
+  color: #fff;
+}
+.btn {
+  text-align: center;
+  margin-top: 1.33rem;
+}
+.btn .btn__js {
+  display: inline-block;
+  border: none;
+  outline: none;
+  color: #fff;
+  text-align: center;
+  border-radius: 0.11rem;
+}
+.btn .cp-tag {
+  margin-top: 0.4rem;
+}
+.form {
+  margin: 0.67rem;
+}
+.mission {
+  background: url("../img/bg.png");
+}
+.mission .title {
+  text-align: center;
+}
+.mission .title img {
+  width: 95%;
+  margin-top: 0.24rem;
+}
+.mission .miss-pro {
+  position: relative;
+  text-align: center;
+}
+.mission .miss-pro .pro-stit {
+  width: 90%;
+  height: 3.92rem;
+  margin-top: 0.27rem;
+}
+.mission .miss-pro .pro-jdt {
+  position: absolute;
+  width: 8rem;
+  height: 0.75rem;
+  top: 2.19rem;
+  left: 1.01rem;
+  background: #75f8ff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  z-index: 11;
+}
+.mission .miss-pro .pro-red {
+  position: absolute;
+  top: 2.36rem;
+  left: 1.2rem;
+  width: 7.76rem;
+  height: 0.56rem;
+  background: #f13f6c;
+  z-index: 22;
+  border-radius: 20px;
+}
+.mission .miss-pro .pro-dingz {
+  position: absolute;
+  top: 2.85rem;
+  left: 2.27rem;
+  width: 5.54rem;
+  z-index: 33;
+}
+.mission .miss-pro .pro-day {
+  position: absolute;
+  top: 2.44rem;
+  left: 1.3rem;
+  font-weight: 600;
+  z-index: 44;
+  font-size: 0.27rem;
+}
+.mission .miss-pro .pro-day li {
+  display: inline-block;
+  margin-right: 0.54rem;
+}
+.mission .miss-pro .self {
+  position: absolute;
+  top: 1.33rem;
+  left: 1.39rem;
+  z-index: 55;
+}
+.mission .miss-pro .self .self-bg {
+  width: 0.75rem;
+  height: 1.07rem;
+}
+.mission .miss-pro .self .self-ava {
+  position: absolute;
+  top: 0.13rem;
+  left: 0.11rem;
+  width: 0.53rem;
+  height: 0.53rem;
+  background-color: #000;
+  border-radius: 99px;
+}
+.mission .miss-pro .ta {
+  position: absolute;
+  top: 2.83rem;
+  left: 1.39rem;
+  z-index: 55;
+}
+.mission .miss-pro .ta .ta-bg {
+  width: 0.75rem;
+  height: 1.07rem;
+}
+.mission .miss-pro .ta .ta-ava {
+  position: absolute;
+  top: 0.43rem;
+  left: 0.11rem;
+  width: 0.53rem;
+  height: 0.53rem;
+  background-color: #000;
+  border-radius: 99px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .border-1px {
+    -webkit-transform: scaleY(0.7);
+    transform: scaleY(0.7);
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+  .border-1px {
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+  }
+}
+#mission1 {
+  background: url("../img/bg.png");
+}
+#mission1 .title {
+  text-align: center;
+}
+#mission1 .title img {
+  width: 95%;
+  margin-top: 0.24rem;
+}
+#mission1 .miss-pro {
+  position: relative;
+  text-align: center;
+}
+#mission1 .miss-pro .pro-stit {
+  width: 90%;
+  height: 3.92rem;
+  margin-top: 0.27rem;
+}
+#mission1 .miss-pro .pro-jdt {
+  position: absolute;
+  width: 8rem;
+  height: 0.75rem;
+  top: 2.19rem;
+  left: 1.01rem;
+  background: #75f8ff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  z-index: 11;
+}
+#mission1 .miss-pro .pro-red {
+  position: absolute;
+  top: 2.36rem;
+  left: 1.2rem;
+  width: 7.76rem;
+  height: 0.56rem;
+  background: #f13f6c;
+  z-index: 22;
+  border-radius: 20px;
+}
+#mission1 .miss-pro .pro-dingz {
+  position: absolute;
+  top: 2.85rem;
+  left: 2.27rem;
+  width: 5.54rem;
+  z-index: 33;
+}
+#mission1 .miss-pro .pro-day {
+  position: absolute;
+  top: 2.44rem;
+  left: 1.3rem;
+  font-weight: 600;
+  z-index: 44;
+  font-size: 0.27rem;
+}
+#mission1 .miss-pro .pro-day li {
+  display: inline-block;
+  margin-right: 0.54rem;
+}
+#mission1 .miss-pro .self {
+  position: absolute;
+  top: 1.33rem;
+  left: 1.39rem;
+  z-index: 55;
+}
+#mission1 .miss-pro .self .self-bg {
+  width: 0.75rem;
+  height: 1.07rem;
+}
+#mission1 .miss-pro .self .self-ava {
+  position: absolute;
+  top: 0.13rem;
+  left: 0.11rem;
+  width: 0.53rem;
+  height: 0.53rem;
+  background-color: #000;
+  border-radius: 99px;
+}
+#mission1 .miss-pro .ta {
+  position: absolute;
+  top: 2.83rem;
+  left: 1.39rem;
+  z-index: 55;
+}
+#mission1 .miss-pro .ta .ta-bg {
+  width: 0.75rem;
+  height: 1.07rem;
+}
+#mission1 .miss-pro .ta .ta-ava {
+  position: absolute;
+  top: 0.43rem;
+  left: 0.11rem;
+  width: 0.53rem;
+  height: 0.53rem;
+  background-color: #000;
+  border-radius: 99px;
+}
+/*# sourceMappingURL=mission.css.map */

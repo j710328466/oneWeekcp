@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>一周 CP</title>
+  <script src="./js/flexible.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+  <script type="text/javascript">
+    $youziku.load("body", "b247a4899ca34bd29da8076da3ddafe4", "jdzhonyuanjian");
+    $youziku.draw();
+  </script>
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+  <div id="cp">
+    <!-- 截止报名页面 -->
+    <div class="cp-mask" v-show="show">
+      <div class="cp-end" >
+        <img class="cp-end__ewm" src="./img/girl.png" alt="">
+        <p class="cp-end__desc">
+          活动报名已结束
+        </p>
+        <p class="cp-end__desc">
+          长按扫码关注我们下一期活动
+        </p>
+        <img @click="hide()" class="cp-end__btn" src="./img/iKnow.png" alt="">
+      </div>
+    </div>
+    <!-- 报名页面 -->
+    <div class="cp-content">
+      <div class="cp-header">
+        <img src="./img/cp-header.png" alt="" class="header-pic">
+      </div>
+      <div class="cp-tag">
+        <div class="wuhou">
+          <img src="./img/wuhou-tag.png" alt="">
+        </div>
+        <img src="./img/cp-tag.png" class="cp-tag__Pic"alt="">
+        <div class="btn cp-btn">
+          <a class=" btn__js" href='javascript:;' @click="timeOver()">
+            <img class="cp-btn__pic" src="./img/cp-btn.png" alt="">
+            <p>报名时间：8月15日-8月18日</p>
+            <p>参加活动后，将退还报名费</p>
+          </a>
+        </div>
+      </div>
+      <div class="wh-hezuo">
+        <img src="./img/wuhou-lx.png" alt="">
+      </div>
+      <div class="time_out" style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.7);position: fixed;top: 0;z-index: 999;display: none;">
+        <div style="width: 100%;height: 100%;display: flex;justify-content: center;align-items: center">
+            <img src="./img/time_out.png" alt="" style="width: 70%">
+        </div>
+      </div>
+    </div>
+    <!-- <div class="cp-fuli">
+      <p class="att">报名成功即可获得</p>
+      <ul class="fuli">
+        <li class="fuli-item">
+          <img class="fuli-item__pic" src="./img/weixin.png" alt="">
+          <div class="fuli-cont">
+            <p class="fuli-title">配对CP一名</p>
+            <p class="fuli-desc">完成任务配对成功可以获得联系方式，后续情缘</p>
+          </div>
+        </li>
+        <li class="fuli-item">
+          <img class="fuli-item__pic" src="./img/weixin.png" alt="">
+          <div class="fuli-cont">
+            <p class="fuli-title">配对CP一名</p>
+            <p class="fuli-desc">完成任务配对成功可以获得联系方式，后续情缘</p>
+          </div>
+        </li>
+        <li class="fuli-item">
+          <img class="fuli-item__pic" src="./img/weixin.png" alt="">
+          <div class="fuli-cont">
+            <p class="fuli-title">配对CP一名</p>
+            <p class="fuli-desc">完成任务配对成功可以获得联系方式，后续情缘</p>
+          </div>
+        </li>
+      </ul>
+    </div> -->
+  </div>
+
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script src="./js/wx.js" charset="utf-8"></script>
+  <script src="./js/mixin.js"></script>
+  <script>
+    var vm = new Vue({
+      data: {
+        show: false,
+        d: '',
+        h: '',
+        m: ''
+      },
+      mixins: [mixin],
+      created () {
+        console.log('时间初始化')
+        var leftTime = (new Date(2017,8 - 1,28,16,40)) - (new Date())
+            ,d = parseInt(leftTime / 1000 / 60 / 60 / 24)
+            ,h = parseInt(leftTime / 1000 / 60 / 60 % 24)
+            ,m = parseInt(leftTime / 1000 / 60 % 60)
+            this.d = d
+            this.h = h
+            this.m = m
+      },
+      methods: {
+        hide () {
+          return this.show = false
+        },
+        endShow () {
+          return this.show
+        },
+        timeOver () {
+          if (this.d <= 0 && this.h <= 0 && this.m <= 0) {
+            return this.show = true
+          } else {
+            console.log(this.$el.querySelector('.btn__js'))
+            this.$el.querySelector('.btn__js').href = '{php echo $this->createMobileurl('register');}'
+          }
+        }
+      }
+    }).$mount('#cp')
+  </script>
+  <script>
+    //微信配置
+
+    var shareMeta = {
+
+        imgUrl:"{$_W['attachurl']}{$config['share_img']}",
+
+        link : "{$_W[siteroot]}app/{php echo $this->createmobileurl('index');}",
+
+        desc : "你的好友XXX感受到了洪荒之力的召唤，正在参与南昌一周CP报名，快点进去围观",
+
+        title : "南昌最火一周CP来袭，XXX邀你一起寻找真爱",
+
+    };
+
+    wx.ready(function () {
+
+        wx.showOptionMenu();
+
+        wx.onMenuShareAppMessage(shareMeta);
+
+        wx.onMenuShareTimeline(shareMeta);
+
+    });
+
+    var jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);};
+
+    jssdkconfig.debug = false;
+
+    jssdkconfig.jsApiList = [
+
+        'checkJsApi',
+
+        'showOptionMenu',
+
+        'onMenuShareTimeline',
+
+        'onMenuShareAppMessage',
+
+    ];
+
+    wx.config(jssdkconfig);
+
+  </script>
+</body>
+</html>

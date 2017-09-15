@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>一周CP任务卡</title>
+  <script src="./js/flexible.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+  <script>$youziku.load("body","b247a4899ca34bd29da8076da3ddafe4","jdzhonyuanjian"),$youziku.draw()</script>
+  <link rel="stylesheet" href="./css/finally.css">
+</head>
+<body>
+  <div id="finally" class="mission">
+    <h2 class="cp__title" v-if="isWeiXin()">{{title}}</h2>
+    <div class="title">
+      <img src="./img/mission.png" alt="">
+    </div>
+
+    <div class="miss-pro">
+      <img class="pro-stit" src="./img/stitle.png" alt="">
+      <i class="pro-jdt"></i>
+      <i class="pro-red"></i>
+      <img class="pro-dingz" src="./img/kedu.png" alt="">
+      <ul class="pro-day">
+        <li><a href="http://hd.wuhouapp.cn/app/index.php?i=3&c=entry&do=mission&m=yizhoucp&no=1&wxref=mp.weixin.qq.com">第1天</a></li>
+        <li><a href="http://hd.wuhouapp.cn/app/index.php?i=3&c=entry&do=mission&m=yizhoucp&no=2&wxref=mp.weixin.qq.com">第2天</a></li>
+        <li><a href="http://hd.wuhouapp.cn/app/index.php?i=3&c=entry&do=mission&m=yizhoucp&no=3&wxref=mp.weixin.qq.com">第3天</a></li>
+        <li><a href="http://hd.wuhouapp.cn/app/index.php?i=3&c=entry&do=mission&m=yizhoucp&no=4&wxref=mp.weixin.qq.com">第4天</a></li>
+        <li><a href="http://hd.wuhouapp.cn/app/index.php?i=3&c=entry&do=mission&m=yizhoucp&no=5&wxref=mp.weixin.qq.com">第5天</a></li>
+        <li><a href="http://hd.wuhouapp.cn/app/index.php?i=3&c=entry&no=&do=finally&m=yizhoucp">完成</a></li>
+      </ul>
+      <div class="self">
+        <img class="self-bg" src="./img/self.png">
+        <img class="self-ava" :src="self">
+      </div>
+      <div class="ta" style="left:8rem">
+        <img class="ta-bg" src="./img/ta.png">
+        <img class="ta-ava" :src="ta">
+      </div>
+    </div>
+      <br>
+
+      <div class="he-mess">
+        <img class="befNail" src="./img/nail.png" alt="">
+        <div class="title">
+          <img class="huantiao" src="./img/rectan.png" alt="">
+          <p class="title-word">恭喜完成所有任务功课</p>
+        </div>
+        <p class="desc-gain">获得了他送给你的4个❤️，你可以查看他的详细资料，有兴趣就联系他把。延续缘分</p>
+        <br>
+        <img class="befNail" src="./img/nail.png" alt="">
+      </div>
+      <br>
+
+      <div class="he-mess">
+        <img class="befNail" src="./img/nail.png" alt="">
+        <img class="avatar" :src="myAvatar" alt="">
+        <div class="title">
+          <img src="./img/rectan.png" alt="">
+          <p>{{myName}}的任务功课</p>
+        </div>
+        <div class="cont">
+          <div class="me-pic">
+            <img class="ava" src="./img/girl.png" alt="">
+          </div>
+          <ul class="details">
+            <li class="detail"><p class="detail-mes"><span>微信</span> {{weixin}}</p></li>
+            <li class="detail"><p class="detail-mes"><span>年龄</span> {{year}}年{{month}}月{{day}}日</p></li>
+            <li class="detail">
+              <p class="detail-mes">
+                <span>性格</span>
+                <span class="tag" v-for="item in xingGe">{{item}}</span>
+              </p>
+            </li><li class="detail">
+              <p class="detail-mes">
+                <span>技能</span>
+                <span class="tag" style="background:#feaa43" v-for="item in jiNeng">{{item}}</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <br>
+        <img class="befNail" src="./img/nail.png" alt="">
+        <img class="yuanjiao" src="./img/yuanjiao.png" alt="">
+      </div>
+
+      <div class="he-mess">
+        <img class="befNail" src="./img/nail.png" alt="">
+        <div class="title">
+          <img class="huantiao" src="./img/rectan.png" alt="">
+          <p class="huoJiang">获得奖品</p>
+        </div>
+        <p class="huoJ-desc">获得了他送给你的4个❤️，你可以查看他的详细资料，有兴趣就联系他把。延续缘分</p>
+        <br>
+        <div class="jp">
+          <img src="./img/gouwudai.png" alt="" class="jp-pic">
+          <div class="jp-desc">
+            <h3>线下交友&花灯会礼包一份</h3>
+            <p>含线下门票以及花灯、优惠券等礼物一份</p>
+          </div>
+        </div>
+        <div class="jp">
+          <img src="./img/card.png" alt="" class="jp-pic">
+          <div class="jp-desc">
+            <h3>线下商超50元代金卡一张</h3>
+            <p>本次门票用于新建中心花灯节门票，凭们可以可以参与</p>
+          </div>
+        </div>
+        <img class="befNail" src="./img/nail.png" alt="">
+        <img class="yuanjiao" src="./img/yuanjiao.png" alt="">
+      </div>
+
+      <div class="he-mess rule">
+        <img class="befNail" src="./img/nail.png" alt="">
+        <div class="title">
+          <img class="huantiao" src="./img/rectan.png" alt="">
+          <p class="huoJiang">领取规则</p>
+        </div>
+        <div class="cont">
+          <ul class="details">
+            <li class="detail">
+              <p class="detail-mes"><span>领取时间</span></p>
+              <p class="detail-cont">{{year}}年{{month}}月{{day}}日</p>
+            </li>
+            <li class="detail">
+              <p class="detail-mes"><span>领取地点</span></p>
+              <p class="detail-cont">XXXXXXXXXXXXXX</p>
+            </li>
+            <li class="detail">
+              <p class="detail-mes"><span>领取方式</span></p>
+              <p class="detail-cont">邀请你44来参加我们线下的活动，找到工作人员，出示这个页面下面的二维码，即可领取你的奖品</p>
+            </li>
+
+          </ul>
+          <br>
+          <div class="erweima">
+            <img src="./img/ewm.jpg" alt="">
+          </div>
+        </div>
+        <br>
+        <img class="befNail" src="./img/nail.png" alt="">
+        <img class="yuanjiao" src="./img/yuanjiao.png" alt="">
+      </div>
+
+      <div class="he-mess huadeng">
+        <img class="befNail" src="./img/nail.png" alt="">
+        <div class="huadeng-pic">
+          <img src="./img/huadengjie.png" alt="" class="huadeng-pic">
+        </div>
+        <p>所有参与一周CP的我们都将邀请参加线下活动，你一定要带着你的CP加入哦。我们来个线下见面交友会把</p>
+        <br>
+        <div class="erweima">
+          <img src="./img/ewm.jpg" alt="">
+        </div>
+        <br>
+        <img class="befNail" src="./img/nail.png" alt="">
+      </div>
+    <br>
+    <div class="tag-wuhou">
+      <img src="./img/wh-footer.png" alt="">
+    </div>
+    <div class="time_out" style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.7);position: fixed;top: 0;z-index: 999;display: none;">
+      <div style="width: 100%;height: 100%;display: flex;justify-content: center;align-items: center">
+          <img src="./img/time_out.png" alt="" style="width: 70%">
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script src="./js/wx.js" charset="utf-8"></script>
+  <script src="./js/mixin.js" charset="utf-8"></script>
+  <script>
+    var vm = new Vue({
+      el: '#finally',
+      data: {
+        title: '恭喜完成所有任务',
+        self: './img/weixin.png',
+        ta: './img/weixin.png',
+        heName:'老哈',
+        myName: '刘罗锅',
+        heAvatar: './img/boy.png',
+        myAvatar: './img/girl.png',
+        starNum: 2,
+        play: true,
+        weixin: '123',
+        year: '1888',
+        month: '10',
+        day: '19',
+        xingGe: ['淑女','温柔'],
+        jiNeng: ['开车','烹饪']
+      },
+      mixins: [mixin],
+      methods: {
+        starCli () {
+          console.log(this.starNum++)
+        }
+      }
+    })
+  </script>
+  <script>
+    //微信配置
+
+    var shareMeta = {
+
+        imgUrl:"{$_W['attachurl']}{$config['share_img']}",
+
+        link : "{$_W[siteroot]}app/{php echo $this->createmobileurl('index');}",
+
+        desc : "XXX成功脱单，但不忘你这个好友！邀请你一起参加8月26日~8月28日晚18:30~21:00的新建中心七夕换灯节大型CP活动。",
+
+        title : "朋友一生一起走，单身日子不再有",
+
+    };
+
+    wx.ready(function () {
+
+        wx.showOptionMenu();
+
+        wx.onMenuShareAppMessage(shareMeta);
+
+        wx.onMenuShareTimeline(shareMeta);
+
+    });
+
+    var jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);};
+
+    jssdkconfig.debug = false;
+
+    jssdkconfig.jsApiList = [
+
+        'checkJsApi',
+
+        'showOptionMenu',
+
+        'onMenuShareTimeline',
+
+        'onMenuShareAppMessage',
+
+    ];
+
+    wx.config(jssdkconfig);
+
+  </script>
+</body>
+</html>

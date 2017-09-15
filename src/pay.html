@@ -1,0 +1,8 @@
+<form action="{php echo url('mc/cash/wechat');}" method="post" name="dashang">
+	<input type="hidden" name="params" value="{php echo base64_encode(json_encode($params));}" />
+	<button style="display:none;" class="btn btn-success btn-block col-sm-12"  type="submit" id="wBtn" value="wechat">微信支付</button>
+</form>
+</div>
+<script type="text/javascript">
+ 	document.dashang.submit();
+</script>

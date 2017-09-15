@@ -1,0 +1,238 @@
+*
+  margin 0
+  padding 0
+a
+  text-decoration none
+li
+  list-style none
+input,textarea
+  outline none
+// 函数样式
+border-1px($color)
+  border 1px solid rgb(179, 179, 179)
+.cp__title
+  height: 1.2rem
+  line-height: 1.2rem
+  text-align: center
+  font-size: 0.48rem
+  font-weight: 400
+  background: #000
+  color #fff
+.btn
+  text-align center
+  margin-top 1.33rem
+  .btn__js
+    display inline-block
+    border none
+    outline none
+    color #fff
+    text-align center
+    border-radius .11rem
+  .cp-tag
+    margin-top .4rem
+.form
+  padding .67rem
+// 任务进度条
+.mission
+  background url('../img/bg.png')
+  .clrcle
+    position absolute
+    width 87%
+    bottom  -.77rem
+    z-index 22
+  .title
+    text-align center
+    img
+      width 95%
+      margin-top .24rem
+  .miss-pro
+    position relative
+    text-align center
+    .pro-stit
+      width 90%
+      height 3.92rem
+      margin-top .27rem
+    .pro-jdt
+      position absolute
+      width 8rem
+      height .75rem
+      top 2.19rem
+      left 1.01rem
+      background #75f8ff
+      border .05rem solid black
+      border-radius .53rem
+      z-index: 11
+    .pro-red
+      position absolute
+      top 2.33rem
+      left 1.2rem
+      width 7.76rem
+      height .56rem
+      background #f13f6c
+      z-index 22
+      border-radius .53rem
+    .pro-dingz
+      position absolute
+      top 2.85rem
+      left 2.27rem
+      width 5.54rem
+      z-index 33
+    .pro-day
+      position absolute
+      width 100%
+      top 2.44rem
+      padding 0 .29rem
+      font-weight 600
+      z-index: 44
+      font-size .27rem
+      li
+        display inline-block
+        margin-right .45rem
+    .self
+      position absolute
+      top 1.33rem
+      left 1.39rem
+      z-index 55
+      .self-bg
+        width .75rem
+        height 1.07rem
+      .self-ava
+        position absolute
+        top .13rem
+        left .11rem
+        width .53rem
+        height .53rem
+        background-color black
+        border-radius 2.64rem
+    .ta
+      position absolute
+      top 2.83rem
+      left 1.39rem
+      z-index 55
+      .ta-bg
+        width .75rem
+        height 1.07rem
+      .ta-ava
+        position absolute
+        top .43rem
+        left .11rem
+        width .53rem
+        height .53rem
+        background-color black
+        border-radius 2.64rem
+  .miss-rule
+    position relative
+    margin .53rem
+    padding 1.44rem .53rem .53rem
+    border .05rem solid black
+    border-radius .11rem
+    background #fff
+    .uPic
+      background #ffe952
+      text-align center
+      line-height 19px
+      box-sizing border-box
+      border 2px solid black
+      border-radius 4px
+      font-weight 600
+    .miss-rule__1
+      position absolute
+      height .59rem
+      top .32rem
+      left -.27rem
+    .tag
+      position relative
+      text-align center
+      font-size .32rem
+      width 6.88rem
+      height .53rem
+      line-height .53rem
+      margin .4rem auto
+      padding-left .4rem
+      background #000
+      color #fff
+      border-radius .11rem
+      &:before
+        content: ''
+        top 0
+        left 0
+        position absolute
+        background url('../img/zhu.png') no-repeat
+        background-size .53rem .53rem
+        width .53rem
+        height .54rem
+  .he-mess
+    position relative
+    margin .48rem
+    padding .27rem .48rem
+    background #fff
+    border .05rem solid black
+    border-radius .11rem
+    .avatar
+      position absolute
+      top -.99rem
+      left 39%
+      width 1.73rem
+      height 1.73rem
+      border-radius 99px
+      border 2px solid black
+    .title
+      position absolute
+      top 12px
+      left 18%
+      z-index 44
+      img
+        width 5.62rem
+      p
+        position absolute
+        text-align center
+        font-size .48rem
+        font-weight 600
+        color #d8423e
+        left 1.17rem
+        bottom .16rem
+    .hePic
+      margin-top 1.2rem
+      border-radius .11rem
+      border .05rem solid black
+      img
+        width 100%
+        filter blur(4px)
+    .befNail
+      width 100%
+  .star
+    position relative
+    width 90%
+    height 4rem
+    margin 0 auto
+    background: url('../img/star.png') no-repeat
+    background-size 100%
+    .starNum
+      position absolute
+      width 1.76rem
+      text-align right
+      height 30px
+      top .8rem
+      left 20px
+      font-size .67rem
+      font-weight 600
+    .starDesc
+      position absolute
+      bottom 1.55rem
+      right .27rem
+      width 5.2rem
+      font-weight 600
+.sub
+  text-align center
+  img
+    width 4.32rem
+// 页面兼容
+@media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)
+  .border-1px
+    -webkit-transform scaleY(.7)
+    transform: scaleY(.7)
+
+@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)
+  .border-1px
+    -webkit-transform scaleY(.5)
+    transform: scaleY(.5)

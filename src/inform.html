@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>填写资料</title>
+  <script src="./js/flexible.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+  <script type="text/javascript">
+    $youziku.load("body", "b247a4899ca34bd29da8076da3ddafe4", "jdzhonyuanjian");
+    $youziku.draw();
+  </script>
+  <link rel="stylesheet" href="./css/inform.css">
+</head>
+<body>
+  <div id="inform">
+    <h2 class="cp__title" v-if="isWeiXin()">{{title}}</h2>
+    <h1 class="title">
+      <img class="inform-sign" src="./img/inform-sign.png" alt="">
+    </h1>
+    <p class="inform-desc">
+      <img class="inform-att" src="./img/inform-att.png" alt="">
+    </p>
+    <form action="/ques.html" method="get">
+      <div class="form">
+        <ol class="inform-list">
+          <!-- 性别 -->
+          <li class="item">
+            <p class="item-title">
+              <span class="item-num">NO.1</span>
+              性别
+            </p>
+            <div class="item-cont">
+              <div class="sex" v-for="(item,index) in sex">
+                <label :for="item.en" @click='age(index)'>
+                  <i class="sex-box"></i>
+                  <img src="./img/ok.png" v-if="sex_index == index">
+                  <span>{{item.name}}</span>
+                  <input type="radio" :id="item.en" name="sex" :value="item.en">
+                </label>
+              </div>
+            </div>
+            <div class="circle">
+              <img src="./img/yuanjiao.png" alt="">
+            </div>
+          </li>
+          <!-- 年龄 -->
+          <li class="item">
+            <p class="item-title">
+              <span class="item-num">NO.2</span>
+              年龄
+            <div class="item-cont">
+              <div class="age">
+                <select name="year" id="tag-age__year" >
+                  <option v-for="item in year" :value='item'>{{item}}年</option>
+                </select>
+                <select name="month" id="tag-age__month" >
+                  <option v-for="m in 12" :value='m'>{{m}}月</option>
+                </select>
+                <select name="day" id="tag-age__day" >
+                  <option v-for="d in 31" :value='d'>{{d}}日</option>
+                </select>
+              </div>
+              <div class="tag-age">
+              </div>
+            </div>
+            <div class="circle">
+              <img src="./img/yuanjiao.png" alt="">
+            </div>
+          </li>
+          <!-- 状态 -->
+          <li class="item">
+            <p class="item-title">
+              <span class="item-num">NO.3</span>
+              状态
+            </p>
+            <div class="item-cont">
+              <div class="ings">
+                <div class="ing" v-for="(item,index) in ing">
+                  <label class="ing-tag" :for="item.zh" @click="zhuantai(index)">
+                    <i class="ing-box"></i>
+                    <img src="./img/ok.png" v-if="ing_index == index">
+                    <span>{{item.name}}</span>
+                    <input type="radio" style="display:none" :id="item.zh" name="ing" :value="item.zh">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="circle">
+              <img src="./img/yuanjiao.png" alt="">
+            </div>
+          </li>
+          <!-- 学历 -->
+          <li class="item">
+            <p class="item-title">
+              <span class="item-num">NO.4</span>
+              学历
+            </p>
+            <div class="item-cont">
+              <div class="greed" v-for="(item,index) in greed">
+                <label :for="item.en" @click='xueli(index)'>
+                  <i class="greed-box"></i>
+                  <img src="./img/ok.png" v-if="greed_index == index">
+                  <span>{{item.name}}</span>
+                  <input type="radio" :id="item.en" name="greed" :value="item.en">
+                </label>
+              </div>
+            </div>
+            <div class="circle">
+              <img src="./img/yuanjiao.png" alt="">
+            </div>
+          </li>
+          <!-- 性格 -->
+          <li class="item">
+            <p class="item-title">
+              <span class="item-num">NO.5</span>
+              性格
+            </p>
+            <div class="item-cont">
+              <ul class="characters">
+                <li class="character">
+                  <label v-for="(item,index) in characters">
+                    <i></i>
+                    <input type="checkbox" v-model="char" name="charact" value="xingGe" @click=pick(index)>
+                    <img src="./img/ok.png" alt="" v-show="arr.indexOf(index) >= 0">
+                    <p>{{item.name}}</p>
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <div class="circle">
+              <img src="./img/yuanjiao.png" alt="">
+            </div>
+          </li>
+          <!-- 技能 -->
+          <li class="item">
+            <p class="item-title">
+              <span class="item-num">NO.6</span>
+              技能
+            </p>
+            <div class="item-cont">
+              <ul class="skills">
+                <li class="skill">
+                  <label v-for="(item,index) in skills">
+                    <i></i>
+                    <input type="checkbox" name="skill" :value="item.en" @click=jinen(index)>
+                    <img class="jn" src="./img/ok.png" v-show="jn.indexOf(index) >= 0">
+                    <p>{{item.name}}</p>
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <div class="circle">
+              <img src="./img/yuanjiao.png" alt="">
+            </div>
+          </li>
+          <!-- 手机 -->
+          <li class="item">
+            <p class="item-title">
+              <span class="item-num">NO.7</span>
+              手机
+            </p>
+            <div class="item-cont">
+              <div class="tel">
+                <img src="./img/Smartphone.png" alt="">
+                <input type="text" name="tel" placeholder="请输入手机号">
+              </div>
+              <p class="tel-say">联系方式只有工作人员才能查看，方便联系</p>
+            </div>
+          </li>
+        </ol>
+        <div class="inform-btn">
+          <label @click="sub(event)">
+            <input class="btn__js" style="display:none" type="submit" name="submit"/>
+            <img src="./img/inform-btn.png" alt="">
+          </label>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+  <script src="https://cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
+  <script src="./js/wx.js" charset="utf-8"></script>
+  <script src="./js/mixin.js" charset="utf-8"></script>
+  <script>
+    var vm = new Vue({
+      el: '#inform',
+      data: {
+        title: '填写资料',
+        year: [],
+        sex: [{'en':'boy','name':'男士'},{'en':'girl','name':'女士'}],
+        sex_index: 111,
+        ing: [{'zh':'student','name':'在校生'},{'zh':'worker','name':'工作者'},{'zh':'other','name':'自由职业'}],
+        ing_index: 222,
+        greed: [{'en':'high','name': '高中及以下'},{'en': 'dz','name': '大专'},{'en': 'bk','name':'本科'},{'en':'ss','name':'硕士及以上'}],
+        greed_index: 333,
+        characters: [{'en':'s','name': '淑女'},{'en':'sh','name': '淑女'},{'en':'shu','name': '淑女'},{'en':'shuv','name': '淑女'},{'en':'snv','name': '淑女'},{'en':'sv','name':'淑女'}],
+        char: [],
+        skills: [{'en':'yundong','name': '运动'},{'en':'sport','name': '运动'},{'en':'cookies','name': '烹饪'},{'en':'travel','name': '旅行'},{'en':'tral','name': '旅行'},{'en':'it','name':'技术控'}],
+        skil: false,
+        arr:[],
+        jn:[]
+      },
+      mixins: [mixin],
+      mounted () {
+        console.log(this.sex[0])
+        for (var i = 1970; i <= 2017; i++) {
+          this.year.push(i)
+        }
+        console.log(this.arr.indexOf(1))
+      },
+      methods: {
+        age: function (index) {
+          this.sex_index = index
+        },
+        zhuantai: function (index) {
+          this.ing_index = index
+        },
+        xueli: function (index) {
+          this.greed_index = index
+        },
+        pick:function(index){
+          if(this.arr.indexOf(index) >= 0){
+            this.arr.splice(this.arr.indexOf(index),1);
+          }else{
+            this.arr.push(index);
+          }
+        },
+        jinen: function (index) {
+          if(this.jn.indexOf(index) >= 0){
+            console.log(111);
+            this.jn.splice(this.jn.indexOf(index),1);
+          }else{
+            console.log(222);
+            this.jn.push(index);
+          }
+        },
+        sub: function (event) {
+          var sex = $('input:radio[name="sex"]:checked').val()
+          var ing = $('input:radio[name="ing"]:checked').val()
+          var greed = $('input:radio[name="greed"]:checked').val()
+          var charact = $('input:checkbox[name="charact"]:checked').val()
+          var skill = $('input:checkbox[name="skill"]:checked').val()
+          console.log(charact);
+          event.preventDefault()
+        }
+      }
+    })
+  </script>
+</body>
+</html>
